@@ -13,6 +13,9 @@ int main(int argc, char* argv[]) {
 				break;
 			} else if (pid > 0) {
 				printf("Processo pai %d criou %d \n", getpid(), pid);
+			} else {
+				printf("Processo não pode ser criado.\n");
+				break;
 			}
 		}
 	}
