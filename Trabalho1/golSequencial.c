@@ -14,9 +14,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 typedef unsigned char cell_t;
-bool log = 0;
 
 cell_t ** allocate_board (int size) {
   cell_t ** board = (cell_t **) malloc(sizeof(cell_t*)*size);

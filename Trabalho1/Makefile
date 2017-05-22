@@ -1,9 +1,9 @@
 CC=gcc
 
-FLAGS=-O3 -Wno-unused-result -std=c11
+FLAGS=-std=gnu11 -O3 -Wno-unused-result
 LDFLAGS=-lpthread
 #DEBUG=-DDEBUG
-RESULT=-DRESULT
+#RESULT=-DRESULT
 
 all: gol
 
