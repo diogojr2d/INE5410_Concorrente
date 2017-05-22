@@ -121,27 +121,42 @@ void* thrWork(void* args_) {
     end += (size*size)%numThreads;
   }
 
-  //printf("thread id: %d , range: %d , size: %d , steps: %d , start: %d , end: %d \n", thrID, thrRange, size, steps, start, end);
-
   int s = 0;
   while (currentStep < steps) {
     s = 0;
-    //printf("thread id: %d while currentStep: %d \n", thrID, currentStep);
-//  play (size, start, end);  
-    int i, j, a, c;
+    play (size, start, end);  
+    //int i, j, a, c;
     /* for each cell, apply the rules of Life */
-
+/*
     for (c=start; c<end; ++c) {
       i = c%size;
       j = c/size;
       a = adjacent_to (size, i, j);
+      /* ADJACENT_TO
+      int k, l, count=0;
+
+      int sk = (i>0) ? i-1 : i;
+      int ek = (i+1 < size) ? i+1 : i;
+      int sl = (j>0) ? j-1 : j;
+      int el = (j+1 < size) ? j+1 : j;
+
+      for (k=sk; k<=ek; k++) {
+        for (l=sl; l<=el; l++) {
+          count+=prev[k][l];
+        }
+      }
+      count-=prev[i][j];
+      */
+     // END ADJACENT_TO
+    /*
       if (a == 2) next[i][j] = prev[i][j];
       if (a == 3) next[i][j] = 1;
       if (a < 2) next[i][j] = 0;
       if (a > 3) next[i][j] = 0;
     }
+    */
 //  fim play
-    //printf("thread id: %d terminou play\n", thrID);
+
     // aguarda que todas as threads calculem o novo tabuleiro
     s = pthread_barrier_wait(&barrier);
 
@@ -157,12 +172,9 @@ void* thrWork(void* args_) {
       currentStep++;
     }
 
-    //printf("thread id: %d chegou na segunda barreira\n", thrID);
     // aguarda a atualização, antes de partir para o próximo step
     pthread_barrier_wait(&barrier);
-    //printf("thread id: %d passou da segunda barreira\n", thrID);
   }
-  //printf("thread id: %d terminou\n", thrID);
   pthread_exit(NULL);
 }
 
